@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useTheme } from '@/components/ui/theme-provider';
 
 interface IncidentFormProps {
   onAddIncident: (title: string, description: string, severity: SeverityLevel) => void;
@@ -16,6 +17,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
   const [description, setDescription] = useState('');
   const [severity, setSeverity] = useState<SeverityLevel>('Medium');
   const { toast } = useToast();
+  const { theme } = useTheme();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +42,17 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
       title: "Incident Reported",
       description: "Your incident has been successfully added to the dashboard"
     });
+  };
+
+  const getSeverityButtonClass = (level: SeverityLevel) => {
+    if (severity !== level) return '';
+    
+    switch(level) {
+      case 'Low': return 'bg-success text-success-foreground';
+      case 'Medium': return 'bg-warning text-warning-foreground';
+      case 'High': return 'bg-destructive text-destructive-foreground';
+      default: return '';
+    }
   };
 
   return (
@@ -85,11 +98,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
                   type="button"
                   variant={severity === level ? "default" : "outline"}
                   onClick={() => setSeverity(level)}
-                  className={
-                    severity === level ? 
-                    `bg-${level === 'Low' ? 'success' : level === 'Medium' ? 'warning' : 'destructive'}` : 
-                    ''
-                  }
+                  className={getSeverityButtonClass(level)}
                 >
                   {level}
                 </Button>
