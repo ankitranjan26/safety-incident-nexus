@@ -7,7 +7,7 @@ import IncidentForm from './IncidentForm';
 import ThreeScene from './ThreeScene';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Filter, SortAscending, SortDescending } from 'lucide-react';
+import { Filter, ArrowDownAZ, ArrowUpAZ } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
   const [incidents, setIncidents] = useState<Incident[]>(mockIncidents);
@@ -86,12 +86,12 @@ const Dashboard: React.FC = () => {
                 >
                   {sortOrder === 'newest' ? (
                     <>
-                      <SortDescending size={16} className="mr-2" />
+                      <ArrowDownAZ size={16} className="mr-2" />
                       Newest First
                     </>
                   ) : (
                     <>
-                      <SortAscending size={16} className="mr-2" />
+                      <ArrowUpAZ size={16} className="mr-2" />
                       Oldest First
                     </>
                   )}
