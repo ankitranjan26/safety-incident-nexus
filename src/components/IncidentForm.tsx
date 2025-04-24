@@ -56,15 +56,15 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
   };
 
   return (
-    <Card>
-      <CardHeader>
+    <Card className="glass-card transform transition-all duration-500 hover:scale-[1.02] hover:-rotate-1">
+      <CardHeader className="animate-fade-in">
         <CardTitle className="title-3d text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           Report New Incident
         </CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
+          <div className="space-y-2 animate-fade-in" style={{ animationDelay: '100ms' }}>
             <label htmlFor="title" className="text-sm font-medium">
               Title <span className="text-destructive">*</span>
             </label>
@@ -74,10 +74,11 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Concise incident title"
               required
+              className="transition-all duration-300 hover:shadow-md focus:scale-[1.01]"
             />
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-2 animate-fade-in" style={{ animationDelay: '200ms' }}>
             <label htmlFor="description" className="text-sm font-medium">
               Description <span className="text-destructive">*</span>
             </label>
@@ -88,10 +89,11 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
               placeholder="Detailed description of the incident"
               required
               rows={4}
+              className="transition-all duration-300 hover:shadow-md focus:scale-[1.01]"
             />
           </div>
           
-          <div className="space-y-2">
+          <div className="space-y-2 animate-fade-in" style={{ animationDelay: '300ms' }}>
             <label className="text-sm font-medium">Severity</label>
             <div className="flex space-x-2">
               {(['Low', 'Medium', 'High'] as SeverityLevel[]).map((level) => (
@@ -100,7 +102,9 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
                   type="button"
                   variant={severity === level ? "default" : "outline"}
                   onClick={() => setSeverity(level)}
-                  className={getSeverityButtonClass(level)}
+                  className={`transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${
+                    severity === level ? 'shadow-lg scale-105' : ''
+                  } ${getSeverityButtonClass(level)}`}
                 >
                   {level}
                 </Button>
@@ -110,7 +114,11 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
         </CardContent>
         
         <CardFooter>
-          <Button type="submit" className="w-full">
+          <Button 
+            type="submit" 
+            className="w-full animate-fade-in hover:scale-[1.02] transition-all duration-300 hover:-translate-y-0.5"
+            style={{ animationDelay: '400ms' }}
+          >
             Submit Report
           </Button>
         </CardFooter>
@@ -120,3 +128,4 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
 };
 
 export default IncidentForm;
+
