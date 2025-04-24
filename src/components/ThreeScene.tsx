@@ -1,10 +1,9 @@
-
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
-function Cube({ position, color }: { position: [number, number, number]; color: string }) {
+function SpinningTorusKnot({ position, color }: { position: [number, number, number]; color: string }) {
   const meshRef = useRef<THREE.Mesh>(null!);
   
   useFrame((state, delta) => {
@@ -16,13 +15,13 @@ function Cube({ position, color }: { position: [number, number, number]; color: 
 
   return (
     <mesh position={position} ref={meshRef}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={color} />
+      <torusKnotGeometry args={[0.6, 0.2, 128, 32]} />
+      <meshStandardMaterial color={color} metalness={0.5} roughness={0.2} />
     </mesh>
   );
 }
 
-function FloatingParticles({ count = 50 }: { count?: number }) {
+function FloatingParticles({ count = 100 }: { count?: number }) {
   const particles = useRef<THREE.Points>(null!);
   
   useFrame((state) => {
@@ -60,14 +59,16 @@ function FloatingParticles({ count = 50 }: { count?: number }) {
 
 const ThreeScene: React.FC = () => {
   return (
-    <div className="h-48 w-full bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg overflow-hidden">
+    <div className="h-64 w-full bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg overflow-hidden backdrop-blur-sm border border-primary/20">
       <Canvas camera={{ position: [0, 0, 6] }}>
+        <color attach="background" args={['transparent']} />
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        <Cube position={[-1.5, 0, 0]} color="#9b87f5" />
-        <Cube position={[1.5, 0, 0]} color="#7E69AB" />
-        <FloatingParticles count={100} />
+        <SpinningTorusKnot position={[-1.5, 0, 0]} color="#9b87f5" />
+        <SpinningTorusKnot position={[1.5, 0, 0]} color="#7E69AB" />
+        <FloatingParticles count={150} />
+        <Stars radius={100} depth={50} count={1000} factor={4} saturation={0} fade speed={1} />
         <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
       </Canvas>
     </div>

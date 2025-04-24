@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { mockIncidents } from '../data/mockIncidents';
 import { Incident, SeverityLevel } from '../types/incident';
@@ -7,12 +6,14 @@ import IncidentForm from './IncidentForm';
 import ThreeScene from './ThreeScene';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Filter, ArrowDownAZ, ArrowUpAZ } from 'lucide-react';
+import { Filter, ArrowDownAZ, ArrowUpAZ, Sun, Moon } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const Dashboard: React.FC = () => {
   const [incidents, setIncidents] = useState<Incident[]>(mockIncidents);
   const [severityFilter, setSeverityFilter] = useState<SeverityLevel | 'All'>('All');
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
+  const { theme, setTheme } = useTheme();
   
   const handleAddIncident = (title: string, description: string, severity: SeverityLevel) => {
     const newIncident: Incident = {
@@ -27,13 +28,11 @@ const Dashboard: React.FC = () => {
   };
   
   const filteredAndSortedIncidents = useMemo(() => {
-    // First apply filter
     let result = incidents;
     if (severityFilter !== 'All') {
       result = result.filter(incident => incident.severity === severityFilter);
     }
     
-    // Then apply sort
     return result.sort((a, b) => {
       const dateA = new Date(a.reportedDate).getTime();
       const dateB = new Date(b.reportedDate).getTime();
@@ -42,8 +41,19 @@ const Dashboard: React.FC = () => {
   }, [incidents, severityFilter, sortOrder]);
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/5">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/5 transition-colors duration-300">
       <div className="container mx-auto py-8 px-4 max-w-6xl">
+        <div className="flex justify-end mb-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            className="rounded-full"
+          >
+            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
+        </div>
+
         <div className="text-center mb-12 space-y-4">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-fade-in">
             AI Safety Incident Dashboard
@@ -59,7 +69,7 @@ const Dashboard: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-6">
-            <Card className="shadow-xl border-secondary/20 bg-card/50 backdrop-blur-sm">
+            <Card className="glass-card">
               <CardContent className="pt-6">
                 <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
                   <div className="flex items-center">
