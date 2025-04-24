@@ -58,7 +58,9 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-bold">Report New Incident</CardTitle>
+        <CardTitle className="title-3d text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Report New Incident
+        </CardTitle>
       </CardHeader>
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">

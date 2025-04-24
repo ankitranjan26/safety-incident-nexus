@@ -56,10 +56,10 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="text-center mb-12 space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-fade-in">
+          <h1 className="title-3d bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent animate-fade-in">
             AI Safety Incident Dashboard
           </h1>
-          <p className="text-lg text-foreground/80 animate-fade-in max-w-2xl mx-auto">
+          <p className="subtitle-3d text-foreground/80 animate-fade-in max-w-2xl mx-auto">
             Monitor and report potential AI system safety violations and incidents
           </p>
         </div>
