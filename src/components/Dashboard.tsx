@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { mockIncidents } from '../data/mockIncidents';
 import { Incident, SeverityLevel } from '../types/incident';
@@ -49,7 +48,7 @@ const Dashboard: React.FC = () => {
             variant="outline"
             size="icon"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="rounded-full"
+            className="rounded-full hover-lift"
           >
             {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
@@ -64,13 +63,13 @@ const Dashboard: React.FC = () => {
           </p>
         </div>
         
-        <div className="mb-10 rounded-xl overflow-hidden shadow-lg animate-float">
+        <div className="mb-10 rounded-xl overflow-hidden shadow-lg animate-float animate-tilt">
           <ThreeScene />
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-6">
-            <Card className="glass-card">
+            <Card className="glass-card animate-fade-in">
               <CardContent className="pt-6">
                 <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
                   <div className="flex items-center">
@@ -137,7 +136,7 @@ const Dashboard: React.FC = () => {
             </Card>
           </div>
           
-          <div className="animate-fade-in">
+          <div className="animate-fade-in card-3d-hover">
             <IncidentForm onAddIncident={handleAddIncident} />
           </div>
         </div>

@@ -101,6 +101,20 @@
 
   .glass-card {
     @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-lg;
+    transform: perspective(1000px) rotateX(2deg);
+    transition: transform 0.3s ease-out;
+  }
+
+  .glass-card:hover {
+    transform: perspective(1000px) rotateX(0deg) translateY(-5px);
+  }
+
+  .card-3d-hover {
+    transition: transform 0.3s ease-out;
+  }
+
+  .card-3d-hover:hover {
+    transform: perspective(1000px) rotateY(5deg) scale(1.02);
   }
 
   .title-3d {
@@ -113,6 +127,7 @@
       0 5px 10px rgba(0, 0, 0, 0.4);
     transform: perspective(500px) rotateX(10deg);
     transform-origin: center top;
+    animation: float-title 6s ease-in-out infinite;
   }
 
   .subtitle-3d {
@@ -122,6 +137,7 @@
       0 2px 4px rgba(0, 0, 0, 0.3);
     transform: perspective(300px) rotateX(5deg);
     transform-origin: center top;
+    animation: float-subtitle 4s ease-in-out infinite;
   }
 }
 
@@ -167,5 +183,53 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes float-title {
+    0%, 100% {
+      transform: perspective(500px) rotateX(10deg) translateY(0);
+    }
+    50% {
+      transform: perspective(500px) rotateX(10deg) translateY(-10px);
+    }
+  }
+
+  @keyframes float-subtitle {
+    0%, 100% {
+      transform: perspective(300px) rotateX(5deg) translateY(0);
+    }
+    50% {
+      transform: perspective(300px) rotateX(5deg) translateY(-5px);
+    }
+  }
+
+  .animate-tilt {
+    animation: tilt 10s infinite linear;
+  }
+
+  @keyframes tilt {
+    0% {
+      transform: rotate3d(1, 1, 1, 0deg);
+    }
+    25% {
+      transform: rotate3d(1, 1, 1, 2deg);
+    }
+    50% {
+      transform: rotate3d(1, 1, 1, 0deg);
+    }
+    75% {
+      transform: rotate3d(1, 1, 1, -2deg);
+    }
+    100% {
+      transform: rotate3d(1, 1, 1, 0deg);
+    }
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px) scale(1.02) rotate3d(1, 1, 1, 2deg);
   }
 }
