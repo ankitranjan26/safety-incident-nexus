@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { mockIncidents } from '../data/mockIncidents';
 import { Incident, SeverityLevel } from '../types/incident';
@@ -7,7 +8,7 @@ import ThreeScene from './ThreeScene';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Filter, ArrowDownAZ, ArrowUpAZ, Sun, Moon } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/components/ui/theme-provider';
 
 const Dashboard: React.FC = () => {
   const [incidents, setIncidents] = useState<Incident[]>(mockIncidents);
