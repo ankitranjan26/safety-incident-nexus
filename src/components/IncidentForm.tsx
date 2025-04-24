@@ -56,7 +56,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
   };
 
   return (
-    <Card className="glass-card transform transition-all duration-500 hover:scale-[1.02] hover:-rotate-1">
+    <Card className="glass-card">
       <CardHeader className="animate-fade-in">
         <CardTitle className="title-3d text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           Report New Incident
@@ -74,7 +74,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Concise incident title"
               required
-              className="transition-all duration-300 hover:shadow-md focus:scale-[1.01]"
+              className="transition-all duration-300 hover:scale-105 focus:scale-105 hover:shadow-lg"
             />
           </div>
           
@@ -89,7 +89,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
               placeholder="Detailed description of the incident"
               required
               rows={4}
-              className="transition-all duration-300 hover:shadow-md focus:scale-[1.01]"
+              className="transition-all duration-300 hover:scale-105 focus:scale-105 hover:shadow-lg"
             />
           </div>
           
@@ -102,7 +102,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
                   type="button"
                   variant={severity === level ? "default" : "outline"}
                   onClick={() => setSeverity(level)}
-                  className={`transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 ${
+                  className={`transition-all duration-300 hover:scale-110 ${
                     severity === level ? 'shadow-lg scale-105' : ''
                   } ${getSeverityButtonClass(level)}`}
                 >
@@ -116,7 +116,7 @@ const IncidentForm: React.FC<IncidentFormProps> = ({ onAddIncident }) => {
         <CardFooter>
           <Button 
             type="submit" 
-            className="w-full animate-fade-in hover:scale-[1.02] transition-all duration-300 hover:-translate-y-0.5"
+            className="w-full animate-fade-in transition-all duration-300 hover:scale-105 hover:shadow-lg"
             style={{ animationDelay: '400ms' }}
           >
             Submit Report
